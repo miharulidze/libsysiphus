@@ -1,16 +1,16 @@
-CXX=g++
+CC=gcc
 RELEASE_FLAGS= -O3
-LIBSYSIPHUS_OBJS = libsysiphus.po
-LIBSYSIPHUS_CXX_FLAGS = -fPIC
+LIBSYSIPHUS_OBJS = libsysiphus.o
+LIBSYSIPHUS_CFLAGS = -fPIC
 
-%.po: %.cpp
-	$(CXX) $(LIBSYSIPHUS_CXX_FLAGS) -o $@ -c $<
+%.o: %.c
+	$(CC) $(LIBSYSIPHUS_CFLAGS) -o $@ -c $<
 
 libsysiphus.so: $(LIBSYSIPHUS_OBJS)
-	$(CXX) $(LIBSYSIPHUS_CXX_FLAGS) -shared -o $@ $(LIBSYSIPHUS_OBJS)
+	$(CC) $(LIBSYSIPHUS_CFLAGS) -shared -o $@ $(LIBSYSIPHUS_OBJS)
 
-release: LIBSYSIPHUS_CXX_FLAGS += -O3
+release: LIBSYSIPHUS_CFLAGS += -O3
 release: libsysiphus.so
 
 clean:
-	rm *.po libsysiphus.so
+	rm *.o libsysiphus.so

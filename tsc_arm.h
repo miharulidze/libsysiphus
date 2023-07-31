@@ -7,7 +7,7 @@ typedef union
     struct {INT32 lo, hi;} int32;
 } tsc_counter;
 
-inline myInt64 rdtsc(void)
+static inline myInt64 rdtsc(void)
 {
     myInt64 val;
     asm volatile("mrs %0, cntvct_el0" : "=r" (val));
